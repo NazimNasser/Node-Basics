@@ -53,6 +53,8 @@ function onDataReceived(text) {
     else{
       console.log('Please add task')
     }
+  }else if(text.trim().split(" ")[0] === 'remove'){
+      removeItemOnce(text.trim().split(" ")[1])
   }else{
     unknownCommand(text);
   }
@@ -87,17 +89,28 @@ function hello(str){
   console.log(str + "!")
 }
 // list array
-var taskList = ['First Task', 'Second Task']
+var taskList = ['First Task', 'Second Task', 'Third Task']
 function list(){
   for (let i = 0; i < taskList.length; i++) {
     console.log(taskList[i]);
   }
 }
+// add task to array
 function add(task){
   taskList.push(task)
   for (let i = 0; i < taskList.length; i++) {
   console.log(taskList[i])
+  }
 }
+// remove task from array
+function removeItemOnce(value) {
+  var index = Number(value);
+  if (isNaN(index)) {
+    taskList.splice(taskList.length -1, 1);
+  }else{
+    taskList.splice(index -1, 1);
+  }
+  console.log("the task deleted")
 }
 /**
  * Exits the application
