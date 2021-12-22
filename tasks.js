@@ -41,6 +41,8 @@ function onDataReceived(text) {
   }else if(text.trim().split(" ")[0] === 'hello'){
     if(text.trim().split(" ")[1] !== undefined){
       hello(text.trim())
+    }else{
+      console.log('hello!')
     }
   }else{
     unknownCommand(text);
