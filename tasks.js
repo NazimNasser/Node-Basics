@@ -38,11 +38,11 @@ function onDataReceived(text) {
     quit();
   }else if(text === 'help\n'){
     help();
-  }
-  else if(text === 'hello\n'){
-    hello();
-  }
-  else{
+  }else if(text.trim().split(" ")[0] === 'hello'){
+    if(text.trim().split(" ")[1] !== undefined){
+      hello(text.trim())
+    }
+  }else{
     unknownCommand(text);
   }
 }
@@ -68,8 +68,8 @@ function help(){
  *
  * @returns {void}
  */
-function hello(){
-  console.log('hello!')
+function hello(str){
+  console.log(str + "!")
 }
 
 
