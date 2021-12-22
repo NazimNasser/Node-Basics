@@ -111,10 +111,13 @@ function removeItemOnce(value) {
   var index = Number(value);
   if (isNaN(index)) {
     taskList.splice(taskList.length -1, 1);
+    console.log("the task deleted")
+  }else if(index > taskList.length){
+    console.log('That number does not exist')
   }else{
     taskList.splice(index -1, 1);
+    console.log("the task deleted")
   }
-  console.log("the task deleted")
 }
 /**
  * Exits the application
