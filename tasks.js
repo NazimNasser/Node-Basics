@@ -48,13 +48,13 @@ function onDataReceived(text) {
     list()
   }else if(text.trim().split(" ")[0] === 'add'){
     if(text.trim().split(" ")[1] !== undefined){
-      add(text.trim().split(" ")[1])
+      add(text.trim().substring(4))
     }
     else{
-      console.log('Please add task')
+      console.log('error: Please add task')
     }
   }else if(text.trim().split(" ")[0] === 'remove'){
-      removeItemOnce(text.trim().split(" ")[1])
+      removeItemOnce(text.trim().substring(7))
   }else{
     unknownCommand(text);
   }
@@ -76,8 +76,12 @@ function help(){
   console.log(`
                 -help: show the command
                 -hello: to greet username
+                -ls: show you the list of task
+                -add: add task to the list
+                -remove: remove last task from the list or remove (num) to remove what do you want
                 -quit: exit from application
-                -exit: exit from application`)
+                -exit: exit from application
+                `)
 }
 
 /**
@@ -92,7 +96,7 @@ function hello(str){
 var taskList = ['First Task', 'Second Task', 'Third Task']
 function list(){
   for (let i = 0; i < taskList.length; i++) {
-    console.log(`${i+1}: taskList[i]`);
+    console.log(`${i+1}: ${taskList[i]}`);
   }
 }
 // add task to array
