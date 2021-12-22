@@ -42,7 +42,7 @@ function onDataReceived(text) {
     if(text.trim().split(" ")[1] !== undefined){
       hello(text.trim())
     }else{
-      console.log('hello!')
+      hello()
     }
   }else{
     unknownCommand(text);
@@ -62,11 +62,15 @@ function unknownCommand(c){
 }
 // This function show the list command
 function help(){
-  console.log('-help -hello\n-quit -exit')
+  console.log(`
+                -help: show the command
+                -hello: to greet username
+                -quit: exit from application
+                -exit: exit from application`)
 }
 
 /**
- * Says hello
+ * Says hello with the name of the user
  *
  * @returns {void}
  */
