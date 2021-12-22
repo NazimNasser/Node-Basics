@@ -44,6 +44,8 @@ function onDataReceived(text) {
     }else{
       hello()
     }
+  }else if(text.trim() == 'ls'){
+    list()
   }else{
     unknownCommand(text);
   }
@@ -77,7 +79,13 @@ function help(){
 function hello(str){
   console.log(str + "!")
 }
-
+var taskList = ['First Task', 'Second Task']
+function list(){
+  for (let i = 0; i < taskList.length; i++) {
+    taskList[i];
+    console.log(taskList[i]);
+  }
+}
 
 /**
  * Exits the application
