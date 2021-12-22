@@ -44,8 +44,15 @@ function onDataReceived(text) {
     }else{
       hello()
     }
-  }else if(text.trim() == 'ls'){
+  }else if(text.trim() === 'ls'){
     list()
+  }else if(text.trim().split(" ")[0] === 'add'){
+    if(text.trim().split(" ")[1] !== undefined){
+      add(text.trim().split(" ")[1])
+    }
+    else{
+      console.log('Please add task')
+    }
   }else{
     unknownCommand(text);
   }
@@ -79,14 +86,19 @@ function help(){
 function hello(str){
   console.log(str + "!")
 }
+// list array
 var taskList = ['First Task', 'Second Task']
 function list(){
   for (let i = 0; i < taskList.length; i++) {
-    taskList[i];
     console.log(taskList[i]);
   }
 }
-
+function add(task){
+  taskList.push(task)
+  for (let i = 0; i < taskList.length; i++) {
+  console.log(taskList[i])
+}
+}
 /**
  * Exits the application
  *
