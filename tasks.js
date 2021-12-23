@@ -53,6 +53,8 @@ function onDataReceived(text) {
     else{
       console.log('error: Please add task')
     }
+  }else if(text.trim().split(" ")[0] === 'edit'){
+    editTask(text)
   }else if(text.trim().split(" ")[0] === 'remove'){
       removeItemOnce(text.trim().substring(7))
   }else{
@@ -104,6 +106,25 @@ function add(task){
   taskList.push(task)
   for (let i = 0; i < taskList.length; i++) {
   console.log(taskList[i])
+  }
+}
+// edit task from array
+function editTask(edit){
+  var editT = Number(edit.trim().split(" ")[1]);
+  if(edit.trim().split(" ")[1] === undefined){
+    console.log('error: Please enter a number or edit the text')
+  }else if(isNaN(editT)){
+      taskList.splice(taskList.length -1, 1,edit.trim().substring(5));
+    console.log("the task edited")
+  }else if(editT > taskList.length){
+    console.log('That number does not exist')
+  }else{
+    if(edit.trim().split(" ")[2] === undefined){
+      console.log("No text")
+    }else{
+    taskList.splice(editT -1, 1,edit.trim().substring(7));
+    console.log("the task edited")
+    }
   }
 }
 // remove task from array
