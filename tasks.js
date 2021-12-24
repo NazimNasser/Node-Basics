@@ -56,6 +56,10 @@ function onDataReceived(text) {
     }
   }else if(text.split(" ")[0] === 'edit'){
     editTask(text)
+  }else if(text.split(" ")[0] === 'check'){
+    check(text)
+  }else if(text.split(" ")[0] === 'uncheck'){
+    uncheck(text)
   }else if(text.split(" ")[0] === 'remove'){
       removeItemOnce(text.substring(7))
   }else{
@@ -171,7 +175,30 @@ function removeItemOnce(value) {
     console.log("the task deleted")
   }
 }
-
+// check list item
+function check(thisText){
+    if(thisText.trim().split(" ")[1] === undefined || thisText.trim().split(" ")[1] > taskList.length){
+      console.log(`This task ${thisText.trim().split(" ")[1]} enter a number include your list`)
+    }else{
+      for (let i = 0; i < taskList.length; i++) {
+        if(i == thisText.trim().split(" ")[1] -1){
+          taskList[i].taskDone = true;
+      }
+    }
+  }
+}
+//  uncheck list item
+function uncheck(thisText){
+    if(thisText.trim().split(" ")[1] === undefined || thisText.trim().split(" ")[1] > taskList.length){
+      console.log(`This task ${thisText.trim().split(" ")[1]} enter a number include your list`)
+    }else{
+      for (let i = 0; i < taskList.length; i++) {
+        if(i == thisText.trim().split(" ")[1] -1){
+          taskList[i].taskDone = false;
+      }
+    }
+  }
+}
 /**
  * Exits the application
  *
