@@ -86,6 +86,9 @@ function help(){
                 -ls: show you the list of task
                 -add: add task to the list
                 -remove: remove last task from the list or remove (num) to remove what do you want
+                -edit: edit your task
+                -check: check a task in the list
+                -uncheck: uncheck a task in the list
                 -quit: exit from application
                 -exit: exit from application
                 `)
