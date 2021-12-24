@@ -223,6 +223,15 @@ function uncheck(thisText){
   }
 }
 
+const { argv } = require("process");
+let file = process.argv[2];
+if(file === undefined){
+  fileName = 'database.json'
+}else{
+  fileName = file;
+  console.log(fileName)
+}
+
 
 let getData = JSON.parse(fs.readFileSync(fileName));
 console.log(getData)
