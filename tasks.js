@@ -34,29 +34,30 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
+  var text = text.trim()
   if (text === 'quit\n' ||text === 'exit\n') {
     quit();
   }else if(text === 'help\n'){
     help();
-  }else if(text.trim().split(" ")[0] === 'hello'){
-    if(text.trim().split(" ")[1] !== undefined){
-      hello(text.trim())
+  }else if(text.split(" ")[0] === 'hello'){
+    if(text.split(" ")[1] !== undefined){
+      hello(text)
     }else{
-      hello()
+      hello(text)
     }
-  }else if(text.trim() === 'ls'){
+  }else if(text === 'ls'){
     list()
-  }else if(text.trim().split(" ")[0] === 'add'){
-    if(text.trim().split(" ")[1] !== undefined){
-      add(text.trim().substring(4))
+  }else if(text.split(" ")[0] === 'add'){
+    if(text.split(" ")[1] !== undefined){
+      add(text.substring(4))
     }
     else{
       console.log('error: Please add task')
     }
-  }else if(text.trim().split(" ")[0] === 'edit'){
+  }else if(text.split(" ")[0] === 'edit'){
     editTask(text)
-  }else if(text.trim().split(" ")[0] === 'remove'){
-      removeItemOnce(text.trim().substring(7))
+  }else if(text.split(" ")[0] === 'remove'){
+      removeItemOnce(text.substring(7))
   }else{
     unknownCommand(text);
   }
@@ -95,18 +96,48 @@ function hello(str){
   console.log(str + "!")
 }
 // list array
-var taskList = ['First Task', 'Second Task', 'Third Task']
-function list(){
-  for (let i = 0; i < taskList.length; i++) {
-    console.log(`${i+1}: ${taskList[i]}`);
+// var taskList = ['First Task', 'Second Task', 'Third Task']
+var taskList = [
+  {
+    taskDone: false,
+    task: 'First Task'
+  },
+  {
+    taskDone: true,
+    task: 'Second Task'
+  },
+  {
+    taskDone: true,
+    task: 'Third Task'
+  },
+  {
+    taskDone: false,
+    task: 'fourth Task'
   }
+
+]
+// function list(){
+//   for (let i = 0; i < taskList.length; i++) {
+//     console.log(`${i+1}: ${taskList[i]}`);
+//   }
+// }
+function list(){
+  taskList.map((item,index) => {
+    if(item.taskDone === true){
+      console.log(`${index+1} - [✔] ${item.task}`);
+    }else{
+      console.log(`${index+1} - [ ] ${item.task}`);
+    }
+  })
 }
 // add task to array
-function add(task){
-  taskList.push(task)
-  for (let i = 0; i < taskList.length; i++) {
-  console.log(taskList[i])
+function add(thisTask){
+  let taskItem = {
+    taskDone: false,
+    task: thisTask
   }
+  taskList.push(taskItem)
+  console.log(`Successfully added`)
 }
 // edit task from array
 function editTask(edit){
@@ -114,7 +145,7 @@ function editTask(edit){
   if(edit.trim().split(" ")[1] === undefined){
     console.log('error: Please enter a number or edit the text')
   }else if(isNaN(editT)){
-      taskList.splice(taskList.length -1, 1,edit.trim().substring(5));
+      taskList[taskList.length -1].task = edit.trim().substring(5);
     console.log("the task edited")
   }else if(editT > taskList.length){
     console.log('That number does not exist')
@@ -122,7 +153,7 @@ function editTask(edit){
     if(edit.trim().split(" ")[2] === undefined){
       console.log("No text")
     }else{
-    taskList.splice(editT -1, 1,edit.trim().substring(7));
+    taskList[editT -1].task = edit.trim().substring(7);
     console.log("the task edited")
     }
   }
@@ -140,6 +171,7 @@ function removeItemOnce(value) {
     console.log("the task deleted")
   }
 }
+
 /**
  * Exits the application
  *
